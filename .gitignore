@@ -1,7 +1,6 @@
-*.py[cod]
-
-# C extensions
-*.so
+*.py[co]
+*.sw[pon]
+scrapy_weibo/bloom.bin
 
 # Packages
 *.egg
@@ -15,9 +14,6 @@ var
 sdist
 develop-eggs
 .installed.cfg
-lib
-lib64
-__pycache__
 
 # Installer logs
 pip-log.txt
@@ -25,12 +21,11 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
-nosetests.xml
 
-# Translations
+#Translations
 *.mo
 
-# Mr Developer
+#Mr Developer
 .mr.developer.cfg
-.project
-.pydevproject
+
+.DS_Store
