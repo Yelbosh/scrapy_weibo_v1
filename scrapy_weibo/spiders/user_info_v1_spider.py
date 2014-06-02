@@ -62,14 +62,14 @@ class UserInfoSpiderV1(BaseSpider):
 
         else:
             uids = []
-            fname = 'gx_lack_uidlist_20131129.txt'
+            fname = 'uid_about_marine'
             log.msg(format='Load uids from %(uids_set)s', level=log.WARNING, uids_set=fname)
-            f = open('./test/%s' % fname, 'r')
+            f = open('./source/%s' % fname, 'r')
             count = 0
             for line in f.readlines():
                 count += 1
                 if count >= start_idx and count <= end_idx:
-                    uids.append(int(line.strip().split(',')[0]))
+                    uids.append(int(line.strip())
                 elif count < start_idx:
                     pass
                 else:
