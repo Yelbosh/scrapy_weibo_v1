@@ -13,7 +13,7 @@ print >> f, '**'*3, time.strftime('%Y-%m-%d %H:%M:%S'), '**'*3
 record = 0
 while 1:
     count_start = table.count()
-    time.sleep(6)
+    time.sleep(60)
     count_end = table.count()
     num = count_end - count_start
     if num == 0:
