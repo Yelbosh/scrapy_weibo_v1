@@ -64,16 +64,16 @@ class UserInfoSpiderV1(BaseSpider):
             uids = []
             fname = 'uid_about_marine'
             log.msg(format='Load uids from %(uids_set)s', level=log.WARNING, uids_set=fname)
-            f = open('./source/%s' % fname, 'r')
+            f = open('./source/%s' % fname)
             count = 0
-            for line in f.readlines():
+            for line in f:
                 count += 1
                 if count >= start_idx and count <= end_idx:
-                    uids.append(int(line.strip())
-                elif count < start_idx:
-                    pass
-                else:
+                    uids.append(int(line.strip()))
+                elif count > start_idx:
                     break
+                else:
+                    pass
             if uids == []:
                 log.msg(format='Not load any uids from %(uids_set)s', level=log.WARNING, uids_set=fname)
             f.close()    
