@@ -56,7 +56,6 @@ scrapy_weibo_settings_dict = {
     'RETRY_TIMES': RETRY_TIMES
 }
 settings.overrides.update(scrapy_weibo_settings_dict)
-print settings.get('DOWNLOAD_DELAY')
 crawler = Crawler(settings)
 crawler.signals.connect(reactor.stop, signal=signals.spider_closed)
 crawler.configure()

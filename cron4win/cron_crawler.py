@@ -13,7 +13,12 @@ END_ID = 10000000
 s = sched.scheduler(time.time, time.sleep)
 
 class Job(Thread):
-    def run(self, since_id, hourly_jobs):
+    def __init__(self, since_id, hourly_jobs):
+        super(Job, self).__init__()
+        self.since_id = since_id
+        self.hourly_jobs = hourly_jobs
+
+    def run(self):
         '''主要业务执行方法'''
         print_time()
         if since_id > END_ID:
@@ -21,7 +26,7 @@ class Job(Thread):
         elif since_id < START_ID:
             print 'crawl out of min range id'
         else:
-            theproc = subprocess.Popen("python auto_scrapy.py " % (since_id, since_id + hourly_jobs), shell = True)
+            theproc = subprocess.Popen("python scrapy_script.py %s %s" % (self.since_id, self.since_id + self.hourly_jobs), shell = True)
             theproc.communicate()
 
 
@@ -45,8 +50,8 @@ def do_somthing(since_id, hourly_jobs):
     delay = 3600 - time.time() % 3600
     s.enter(delay, 0, do_somthing, (since_id + hourly_jobs, hourly_jobs))
     print "-------------- auto scrapy begin running from %s to %s --------------" % (since_id, since_id + hourly_jobs)
-    job = Job()
-    job.start(since_id, hourly_jobs)  
+    job = Job(since_id, hourly_jobs)
+    job.start()  
 
  
 def main(since_id, hourly_jobs):
@@ -55,9 +60,6 @@ def main(since_id, hourly_jobs):
     delay = 0
     s.enter(delay, priority, do_somthing, (since_id, hourly_jobs))
     s.run()
-    while(True):
-        Timer(0, do_somthing, ()).start()
-        time.sleep(3600)
 
 
 if __name__ == "__main__":
