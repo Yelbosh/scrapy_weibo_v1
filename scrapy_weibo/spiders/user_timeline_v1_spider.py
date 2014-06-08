@@ -12,14 +12,14 @@ from scrapy.http import Request
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 API_KEY = '3105114937'
-BASE_URL = 'http://api.t.sina.com.cn/statuses/user_timeline.json?user_id={uid}&page={page}&count=100&source=' + API_KEY
+BASE_URL = 'http://api.t.sina.com.cn/statuses/user_timeline.json?user_id={uid}&page={page}&count=200&source=' + API_KEY
 
 class UserTimelineV1(BaseSpider):
     """usage: scrapy crawl user_timeline -a since_id=3021438975589423 -a max_id=3645300671902176"""
     name = 'user_timeline_v1'
 
     def start_requests(self):
-        uid = 3044080932#3264543895#1813080181
+        uid = 3044080932
         request = Request(BASE_URL.format(uid=uid, page=1))
         request.meta['page'] = 1
         request.meta['uid'] = uid
@@ -28,7 +28,6 @@ class UserTimelineV1(BaseSpider):
     def parse(self, response):
         page = response.meta['page']
         uid = response.meta['uid']
-        print page
 
         resp = json.loads(response.body)
         results = []
