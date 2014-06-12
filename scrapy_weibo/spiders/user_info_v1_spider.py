@@ -8,7 +8,7 @@ from utils4scrapy.tk_maintain import _default_redis
 from scrapy import log
 from scrapy.conf import settings
 from scrapy.http import Request
-
+import time
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
@@ -38,7 +38,13 @@ class UserInfoSpiderV1(BaseSpider):
         
     def start_requests(self):
         uids = self.prepare(self.from_text, self.since_id, self.max_id)
+        count = 0
         for uid in uids:
+	    count += 1
+	    if count%100000 == 0:
+		time.sleep(300)
+	    elif count%10000 == 0:
+		time.sleep(60)
             request = Request(BASE_URL.format(uid=uid), headers=None)
             yield request
 
