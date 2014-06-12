@@ -41,10 +41,10 @@ class UserInfoSpiderV1(BaseSpider):
         count = 0
         for uid in uids:
 	    count += 1
-	    if count%100000 == 0:
-		time.sleep(300)
-	    elif count%10000 == 0:
-		time.sleep(60)
+            if count % 100000 == 0:
+                time.sleep(300)
+            elif count % 10000 == 0:
+                time.sleep(60)
             request = Request(BASE_URL.format(uid=uid), headers=None)
             yield request
 
