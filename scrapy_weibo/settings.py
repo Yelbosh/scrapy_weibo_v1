@@ -88,7 +88,7 @@ AUTOTHROTTLE_DEBUG = True
 RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
 
 SPIDER_MIDDLEWARES = {
-    'utils4scrapy.middlewares.ErrorRequestMiddleware': 40,
+    'utils4scrapy.middlewares.ErrorRequestMiddlewareV1': 40,
     'scrapy.contrib.spidermiddleware.offsite.OffsiteMiddleware': None,
     'scrapy.contrib.spidermiddleware.referer.RefererMiddleware': None,
     'scrapy.contrib.spidermiddleware.urllength.UrlLengthMiddleware': None,
@@ -103,7 +103,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.contrib.downloadermiddleware.robotstxt.RobotsTxtMiddleware': None,
     'scrapy.contrib.downloadermiddleware.httpauth.HttpAuthMiddleware': None,
     #'utils4scrapy.middlewares.RequestTokenMiddleware': 310,
-    'utils4scrapy.middlewares.RequestApiv1AuthMiddleware': 310,
+    'utils4scrapy.middlewares.RequestTokenMiddlewareV1': 310,
     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     'scrapy.contrib.downloadermiddleware.defaultheaders.DefaultHeadersMiddleware': None,
     'scrapy.contrib.downloadermiddleware.redirect.RedirectMiddleware': None,
